@@ -1,0 +1,24 @@
+This program is a kata exercise to creat a library that will allow the addition and subtraction of
+Roman Numerals. This project was done with the following specifications:
+	-Ubuntu Linux 14.04
+	-The C programming Language
+	-GNU GCC compiler
+	-GNU Make
+	-Check unit testing framework
+	-git
+
+The Roman Numerals must follow the following rules:
+	-Roman numerals consist of the follwoing letters: I, V, X, L, C, D, and M which mean 1, 5,
+	 10, 50, 500, and 1000 respectively
+	-An example of addition would be "XIV" + "LX" = "LXXIV"
+	-If a lesser numeral is put before a bigger it means subtraction of the lesser from the larger
+	 i.e. "IV" means 4 and "CM" means 900
+	-If the numeral is I, X or C the user cant have more than three i.e. "III" + "III" /= "IIII"
+	-If the numeral is V, L, or D the user cant have more than one i.e. "D" + "D" /= "DD"
+	-The Maximum Roman Numeral is 3999 or MMMCMXCIX
+
+The project will be utililzing the following principles:
+	-SOLID and DRY 
+	-Test Drive nDevelopment
+	-Source Control and Continuous Integration
+
