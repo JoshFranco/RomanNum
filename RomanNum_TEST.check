@@ -1,0 +1,8 @@
+#include "RomanNum.h"
+#include<string.h>
+
+int match;
+#test WhenSingleRomanNumIsPassedACharReturnThatChar
+	match = strcmp(RomanNum("I"),"I");	
+	fail_unless(match == 0, "When RomanNum is passed a char it does not returns a char");
+
