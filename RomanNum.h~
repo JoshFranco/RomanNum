@@ -1,0 +1,6 @@
+#ifndef ROMANNUM_H
+#define ROMANNUM_H
+
+char RomanNum(char x[]);
+
+#endif
