@@ -29,6 +29,15 @@ START_TEST(WhenMultiRomanNumIsPassedTheyAreReturned)
 }
 END_TEST
 
+START_TEST(TestForCorrectInputFormat)
+{
+#line 15
+	match = strcmp(RomanNum("MMMCMXCIXII"),"MMMCMXCIXII");
+	fail_unless(match != 0, "Testing for correct formatting, MMMCMXCIXII is not a valid input due to the two 'I's after the X");
+
+}
+END_TEST
+
 int main(void)
 {
     Suite *s1 = suite_create("Core");
@@ -39,6 +48,7 @@ int main(void)
     suite_add_tcase(s1, tc1_1);
     tcase_add_test(tc1_1, WhenSingleRomanNumIsPassedACharReturnThatChar);
     tcase_add_test(tc1_1, WhenMultiRomanNumIsPassedTheyAreReturned);
+    tcase_add_test(tc1_1, TestForCorrectInputFormat);
 
     srunner_run_all(sr, CK_ENV);
     nf = srunner_ntests_failed(sr);

@@ -2,7 +2,16 @@
 #include<string.h>
 
 int match;
+
 #test WhenSingleRomanNumIsPassedACharReturnThatChar
 	match = strcmp(RomanNum("I"),"I");	
 	fail_unless(match == 0, "When RomanNum is passed a char it does not returns a char");
+
+#test WhenMultiRomanNumIsPassedTheyAreReturned
+	match = strcmp(RomanNum("XVI"),"XVI");	
+	fail_unless(match == 0, "When RomanNum is passed a char it does not returns a char");
+
+#test TestForCorrectInputFormat
+	match = strcmp(RomanNum("MMMCMXCIXII"),"MMMCMXCIXII");
+	pass_unless(match == 0, "Testing for correct formatting, MMMCMXCIXII is not a valid input due to the two 'I's after the X");
 
