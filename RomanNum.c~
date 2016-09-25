@@ -4,6 +4,50 @@
 #include<stdlib.h>
 #include<string.h>
 
+char* SortStr(const char* OldStr){
+	int t = 0;		
+	int I_count = 0;
+	int X_count = 0;
+	int C_count = 0;
+	int M_count = 0;
+	const char* tmp = OldStr;
+	char* OutputStr = malloc(100 * sizeof(char));	
+
+	while(tmp = strstr(tmp,"I")){	//Counts the number of I X C and M
+		I_count++;
+		tmp++;	
+	}
+	tmp = OldStr;
+	while(tmp = strstr(tmp,"X")){
+		X_count++;
+		tmp++;	
+	}
+	tmp = OldStr;
+	while(tmp = strstr(tmp,"C")){
+		C_count++;
+		tmp++;	
+	}
+	tmp = OldStr;
+	while(tmp = strstr(tmp,"M")){
+		M_count++;
+		tmp++;	
+	}
+	
+	for(t = 0; t < M_count;t++){	//Makes a new String of the counted I X C and M
+		strcat(OutputStr,"M");
+	}
+	for(t = 0; t < C_count;t++){
+		strcat(OutputStr,"C");
+	}
+	for(t = 0; t < X_count;t++){
+		strcat(OutputStr,"X");
+	}
+	for(t = 0; t < I_count;t++){
+		strcat(OutputStr,"I");
+	}	
+	return OutputStr;
+}
+
 char* SearchAndSwap(const char* str, const char* old, const char* new1){
 	char* ret;
 	int i;
@@ -22,7 +66,7 @@ char* SearchAndSwap(const char* str, const char* old, const char* new1){
     	if (ret == NULL)
         	exit(EXIT_FAILURE);
     	i = 0;
-    	while (*str){
+    	while (*str){ 		//Compares the substring with the newstring
         	if (strstr(str, old) == str){
             		strcpy(&ret[i], new1);
             		i += newlen; 
@@ -37,7 +81,7 @@ char* SearchAndSwap(const char* str, const char* old, const char* new1){
 
 char* Unpack(const char* package){
 	char* UnpackedStr = NULL;	
-	UnpackedStr = SearchAndSwap(package,"IV","IIII");
+	UnpackedStr = SearchAndSwap(package,"IV","IIII");	//Use the SearchAndSwap function to make the "package" in terms of I X C and M
 	UnpackedStr = SearchAndSwap(UnpackedStr,"IX","VIIII");
 	UnpackedStr = SearchAndSwap(UnpackedStr,"XL","XXXX");
 	UnpackedStr = SearchAndSwap(UnpackedStr,"XC","LXXXX");
@@ -51,14 +95,12 @@ char* Unpack(const char* package){
 
 const char* RomanNum(const char* var1, const char* var2){
 	char* Answ = malloc(24 * sizeof(char));	
-	int CorrectFormat;
-	char* Temp1 = NULL;
-	char* Temp2 = NULL;
+	int CorrectFormat;	
 
 	regex_t reg;
-	regcomp(&reg, "^M{0,3}(CM|CD|D?C{0,3})(XC|XL|L?X{0,3})(IX|IV|V?I{0,3})$", REG_EXTENDED);	
+	regcomp(&reg, "^M{0,3}(CM|CD|D?C{0,3})(XC|XL|L?X{0,3})(IX|IV|V?I{0,3})$", REG_EXTENDED);	//Regular Expression for a Roman Numeral, for formating
 
-	CorrectFormat = regexec(&reg, var1, 0, NULL, 0);
+	CorrectFormat = regexec(&reg, var1, 0, NULL, 0);	//Check if the input variables are in the correct format
 	if(CorrectFormat != 0){					//Its a NON-MATCH?!?!		
 		printf("The Roman Numeral did not follow the correct input method, plz use all uppercase and follow the described rules in the README file\n");		
 		exit(EXIT_FAILURE);
@@ -70,8 +112,13 @@ const char* RomanNum(const char* var1, const char* var2){
 	}
 
 	strcpy (Answ,var1);
-	strcat (Answ,var2);
-	Temp = Unpack(Answ);
+	strcat (Answ,var2);				//Concatenate the two variables into one
+	
+	Answ = Unpack(Answ);				//Unpack the variables to make it simple to sort
+	Answ = SortStr(Answ);				//Sort the variables to the correct format
+	
+	return Answ;
+	
 
 	
 } 

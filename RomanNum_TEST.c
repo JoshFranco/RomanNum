@@ -54,9 +54,18 @@ END_TEST
 START_TEST(UnpackAndConcatenateRomanNum)
 {
 #line 27
-	match = strcmp(RomanNum("CCCLXIX","DCCCXLV"), "CCCXXXXXXIIIIIIIIICCCCCCCCXXXXIIIII");
-	fail_unless(match == 0, "1st step in adding two roman num's together is to concatenate and then unpack the concatenated number into I X C and M");
+	//match = strcmp(RomanNum("CCCLXIX","DCCCXLV"), "CCCXXXXXXIIIIIIIIICCCCCCCCXXXXIIIII");
+	//fail_unless(match == 0, "1st step in adding two roman num's together is to concatenate and then unpack the concatenated number into I X C and M");
+	fail_unless(1,"omitting test for 2nd step of addition"); 
 
+}
+END_TEST
+
+START_TEST(SortTheUnpackedRomanNum)
+{
+#line 32
+	match = strcmp(RomanNum("CCCLXIX","DCCCXLV"), "CCCCCCCCCCCXXXXXXXXXXIIIIIIIIIIIIII");
+	fail_unless(match == 0,"2nd step in adding two roman num's is to sort the unpacked num");
 }
 END_TEST
 
@@ -73,6 +82,7 @@ int main(void)
     tcase_add_test(tc1_1, TestForCorrectInputFormat);
     tcase_add_test(tc1_1, FirstAddOfOnePlusOne);
     tcase_add_test(tc1_1, UnpackAndConcatenateRomanNum);
+    tcase_add_test(tc1_1, SortTheUnpackedRomanNum);
 
     srunner_run_all(sr, CK_ENV);
     nf = srunner_ntests_failed(sr);
