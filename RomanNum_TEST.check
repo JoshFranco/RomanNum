@@ -35,3 +35,7 @@ int match;
 #test CompressTheSortedRomanNum
 	match = strcmp(RomanNum("CCCLXIX","DCCCXLV"), "MCCXIV");
 	fail_unless(match == 0,"3rd and final step of addition, to compress the sorted Roman Num");
+
+#test Subtraction
+	match = strcmp(RomanNum("XLIII","CXXIX"), "LXXXVI");
+	fail_unless(match == 0,"Subtraction, to Subtraction smaller numeral must be in front of a larger one.");

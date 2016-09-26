@@ -75,6 +75,15 @@ START_TEST(CompressTheSortedRomanNum)
 #line 36
 	match = strcmp(RomanNum("CCCLXIX","DCCCXLV"), "MCCXIV");
 	fail_unless(match == 0,"3rd and final step of addition, to compress the sorted Roman Num");
+
+}
+END_TEST
+
+START_TEST(Subtraction)
+{
+#line 40
+	match = strcmp(RomanNum("XLIII","CXXIX"), "LXXXVI");
+	fail_unless(match == 0,"Subtraction, to use this a smalled numeral must be in front of a larger one.");
 }
 END_TEST
 
@@ -93,6 +102,7 @@ int main(void)
     tcase_add_test(tc1_1, UnpackAndConcatenateRomanNum);
     tcase_add_test(tc1_1, SortTheUnpackedRomanNum);
     tcase_add_test(tc1_1, CompressTheSortedRomanNum);
+    tcase_add_test(tc1_1, Subtraction);
 
     srunner_run_all(sr, CK_ENV);
     nf = srunner_ntests_failed(sr);

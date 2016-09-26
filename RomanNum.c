@@ -4,7 +4,152 @@
 #include<stdlib.h>
 #include<string.h>
 
-char* NewStr(const char* OldStr){
+
+char* Subtract(const char* var1, const char* var2){
+	int I_count1 = 0;
+	int X_count1 = 0;
+	int C_count1 = 0;
+	int M_count1 = 0; 
+	int I_count2 = 0;
+	int X_count2 = 0;
+	int C_count2 = 0;
+	int M_count2 = 0; 
+	int t = 0;
+	char* OutputStr = malloc(100 * sizeof(char));
+	
+	const char* tmp = var1;	
+	while((tmp = strstr(tmp,"I"))){
+		I_count1++;
+		tmp++;	
+	}
+	tmp = var1;	
+	while((tmp = strstr(tmp,"X"))){
+		X_count1++;
+		tmp++;	
+	}
+	tmp = var1;	
+	while((tmp = strstr(tmp,"C"))){
+		C_count1++;
+		tmp++;	
+	}
+	tmp = var1;	
+	while((tmp = strstr(tmp,"M"))){
+		M_count1++;
+		tmp++;	
+	}
+
+	tmp = var2;	
+	while((tmp = strstr(tmp,"I"))){
+		I_count2++;
+		tmp++;	
+	}
+	tmp = var2;	
+	while((tmp = strstr(tmp,"X"))){
+		X_count2++;
+		tmp++;	
+	}
+	tmp = var2;	
+	while((tmp = strstr(tmp,"C"))){
+		C_count2++;
+		tmp++;	
+	}
+	tmp = var2;	
+	while((tmp = strstr(tmp,"M"))){
+		M_count2++;
+		tmp++;	
+	}
+
+	if(I_count1 > I_count2){
+		X_count2 = X_count2 - 1;
+		I_count2 = I_count2 + 10;	
+	}
+	if(X_count1 > X_count2){
+		C_count2 = C_count2 - 1;
+		X_count2 = X_count2 + 10;	
+	}
+	if(C_count1 > C_count2){
+		M_count2 = M_count2 - 1;
+		C_count2 = C_count2 + 10;	
+	}
+
+
+	
+	strcpy(OutputStr,"");
+	for(t = 0; t < M_count2 - M_count1;t++){
+		strcat(OutputStr,"M");
+	}
+	for(t = 0; t < C_count2 - C_count1;t++){
+		strcat(OutputStr,"C");
+	}
+	for(t = 0; t < X_count2 - X_count1;t++){
+		strcat(OutputStr,"X");
+	}
+	for(t = 0; t < I_count2 - I_count1;t++){
+		strcat(OutputStr,"I");
+	}	
+	return OutputStr;
+	
+}
+
+
+int AddOrSub(const char* var1, const char* var2){
+	int I_count1 = 0;
+	int X_count1 = 0;
+	int C_count1 = 0;
+	int M_count1 = 0; 
+	int I_count2 = 0;
+	int X_count2 = 0;
+	int C_count2 = 0;
+	int M_count2 = 0; 
+	
+	const char* tmp = var1;	
+	while((tmp = strstr(tmp,"I"))){
+		I_count1++;
+		tmp++;	
+	}
+	tmp = var1;	
+	while((tmp = strstr(tmp,"X"))){
+		X_count1 = X_count1+10;
+		tmp++;	
+	}
+	tmp = var1;	
+	while((tmp = strstr(tmp,"C"))){
+		C_count1 = C_count1+100;
+		tmp++;	
+	}
+	tmp = var1;	
+	while((tmp = strstr(tmp,"M"))){
+		M_count1 = M_count1+1000;
+		tmp++;	
+	}
+
+	tmp = var2;	
+	while((tmp = strstr(tmp,"I"))){
+		I_count2++;
+		tmp++;	
+	}
+	tmp = var2;	
+	while((tmp = strstr(tmp,"X"))){
+		X_count2 = X_count2+10;
+		tmp++;	
+	}
+	tmp = var2;	
+	while((tmp = strstr(tmp,"C"))){
+		C_count2 = C_count2+100;
+		tmp++;	
+	}
+	tmp = var2;	
+	while((tmp = strstr(tmp,"M"))){
+		M_count2 = M_count2+1000;
+		tmp++;	
+	}
+	if(I_count2+X_count2+C_count2+M_count2 > I_count1+X_count1+C_count1+M_count1)
+		return 0;	//sub
+	else
+		return 1;	//add
+}
+
+char* SortStr(const char* OldStr){
 	int t = 0;		
 	int I_count = 0;
 	int X_count = 0;
@@ -114,6 +259,8 @@ char* Unpack(const char* package){
 
 const char* RomanNum(const char* var1, const char* var2){
 	char* Answ = malloc(24 * sizeof(char));	
+	char* Temp1;
+	char* Temp2;	
 	int CorrectFormat;	
 
 	regex_t reg;
@@ -129,20 +276,27 @@ const char* RomanNum(const char* var1, const char* var2){
 		printf("The Roman Numeral did not follow the correct input method, plz use all uppercase and follow the described rules in the README file\n");		
 		exit(EXIT_FAILURE);
 	}
-	puts(var1);
-	puts(var2);
-	strcpy (Answ,var1);
-	strcat (Answ,var2);				//Concatenate the two variables into one
-	puts(Answ);	
 
-	Answ = Unpack(Answ);		//Unpack the variables to make it simple to sort
-	puts(Answ);	
-	Answ = NewStr(Answ);		//Sort the variables to the correct format
-	puts(Answ);	
-	Answ = Compress(Answ);		//Compress the sorted string, var1 and var2 are now added
+	Temp1 = Unpack(var1);
+	Temp2 = Unpack(var2);
+	//puts(var1);
+	//puts(var2);
+	if(AddOrSub(var1,var2) == 1){
+		strcpy (Answ,Temp1);
+		strcat (Answ,Temp2);	//Concatenate the two variables into one
+		Answ = SortStr(Answ);	//Sort the variables to the correct format
+		Answ = Compress(Answ);	//Compress the sorted string, var1 and var2 are now added
+		return Answ;
+	}
+	else{
+		Answ = Subtract(Temp1,Temp2);
+		Answ = Compress(Answ);
+		return Answ;
+	}
+		
+
+
 	
-	puts(Answ);	
-	return Answ;
 	
 
 	
