@@ -83,7 +83,16 @@ START_TEST(Subtraction)
 {
 #line 40
 	match = strcmp(RomanNum("XLIII","CXXIX"), "LXXXVI");
-	fail_unless(match == 0,"Subtraction, to use this a smalled numeral must be in front of a larger one.");
+	fail_unless(match == 0,"Subtraction, to Subtraction smaller numeral must be in front of a larger one.");
+
+}
+END_TEST
+
+START_TEST(TestingIfProgWillExitIfOver3999)
+{
+#line 44
+	match = strcmp(RomanNum("MM","MM"), "MMMM");
+	fail_unless(match != 0,"Testing if program will give an error if given a number over 3999");
 }
 END_TEST
 
@@ -103,6 +112,7 @@ int main(void)
     tcase_add_test(tc1_1, SortTheUnpackedRomanNum);
     tcase_add_test(tc1_1, CompressTheSortedRomanNum);
     tcase_add_test(tc1_1, Subtraction);
+    tcase_add_test(tc1_1, TestingIfProgWillExitIfOver3999);
 
     srunner_run_all(sr, CK_ENV);
     nf = srunner_ntests_failed(sr);

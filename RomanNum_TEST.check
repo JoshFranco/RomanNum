@@ -39,3 +39,7 @@ int match;
 #test Subtraction
 	match = strcmp(RomanNum("XLIII","CXXIX"), "LXXXVI");
 	fail_unless(match == 0,"Subtraction, to Subtraction smaller numeral must be in front of a larger one.");
+
+#test TestingIfProgWillExitIfOver3999
+	match = strcmp(RomanNum("MM","MM"), "MMMM");
+	fail_unless(match != 0,"Testing if program will give an error if given a number over 3999");

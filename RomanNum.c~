@@ -5,7 +5,7 @@
 #include<string.h>
 
 
-int Subtract(const char* var1, const char* var2){
+char* Subtract(const char* var1, const char* var2){
 	int I_count1 = 0;
 	int X_count1 = 0;
 	int C_count1 = 0;

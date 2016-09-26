@@ -178,6 +178,12 @@ char* SortStr(const char* OldStr){
 		tmp++;	
 	}
 	
+	if(M_count > 3){
+		printf("Numeral is greater than 3999 =[\n");		
+		exit(EXIT_FAILURE);
+	}
+	
+
 	strcpy(OutputStr,"");
 	for(t = 0; t < M_count;t++){
 		strcat(OutputStr,"M");
