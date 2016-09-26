@@ -44,28 +44,37 @@ END_TEST
 START_TEST(FirstAddOfOnePlusOne)
 {
 #line 22
-	//match = strcmp(RomanNum("I","I"), "II");
-	//fail_unless(match == 0, "Simple add of one plus one");
-	fail_unless(1,"omitting test to test Add steps"); 
+	match = strcmp(RomanNum("I","I"), "II");
+	fail_unless(match == 0, "Simple add of one plus one");	
 
 }
 END_TEST
 
 START_TEST(UnpackAndConcatenateRomanNum)
 {
-#line 27
+#line 26
 	//match = strcmp(RomanNum("CCCLXIX","DCCCXLV"), "CCCXXXXXXIIIIIIIIICCCCCCCCXXXXIIIII");
 	//fail_unless(match == 0, "1st step in adding two roman num's together is to concatenate and then unpack the concatenated number into I X C and M");
-	fail_unless(1,"omitting test for 2nd step of addition"); 
+	fail_unless(1,"omitting test for 1st step of addition"); 
 
 }
 END_TEST
 
 START_TEST(SortTheUnpackedRomanNum)
 {
-#line 32
-	match = strcmp(RomanNum("CCCLXIX","DCCCXLV"), "CCCCCCCCCCCXXXXXXXXXXIIIIIIIIIIIIII");
-	fail_unless(match == 0,"2nd step in adding two roman num's is to sort the unpacked num");
+#line 31
+	//match = strcmp(RomanNum("CCCLXIX","DCCCXLV"), "CCCCCCCCCCCXXXXXXXXXXIIIIIIIIIIIIII");
+	//fail_unless(match == 0,"2nd step in adding two roman num's is to sort the unpacked num");
+	fail_unless(1,"omitting test for 2nd step of addition"); 
+
+}
+END_TEST
+
+START_TEST(CompressTheSortedRomanNum)
+{
+#line 36
+	match = strcmp(RomanNum("CCCLXIX","DCCCXLV"), "MCCXIV");
+	fail_unless(match == 0,"3rd and final step of addition, to compress the sorted Roman Num");
 }
 END_TEST
 
@@ -83,6 +92,7 @@ int main(void)
     tcase_add_test(tc1_1, FirstAddOfOnePlusOne);
     tcase_add_test(tc1_1, UnpackAndConcatenateRomanNum);
     tcase_add_test(tc1_1, SortTheUnpackedRomanNum);
+    tcase_add_test(tc1_1, CompressTheSortedRomanNum);
 
     srunner_run_all(sr, CK_ENV);
     nf = srunner_ntests_failed(sr);

@@ -4,7 +4,7 @@
 #include<stdlib.h>
 #include<string.h>
 
-char* SortStr(const char* OldStr){
+char* NewStr(const char* OldStr){
 	int t = 0;		
 	int I_count = 0;
 	int X_count = 0;
@@ -13,27 +13,28 @@ char* SortStr(const char* OldStr){
 	const char* tmp = OldStr;
 	char* OutputStr = malloc(100 * sizeof(char));	
 
-	while(tmp = strstr(tmp,"I")){	//Counts the number of I X C and M
+	while((tmp = strstr(tmp,"I"))){
 		I_count++;
 		tmp++;	
 	}
 	tmp = OldStr;
-	while(tmp = strstr(tmp,"X")){
+	while((tmp = strstr(tmp,"X"))){
 		X_count++;
 		tmp++;	
 	}
 	tmp = OldStr;
-	while(tmp = strstr(tmp,"C")){
+	while((tmp = strstr(tmp,"C"))){
 		C_count++;
 		tmp++;	
 	}
 	tmp = OldStr;
-	while(tmp = strstr(tmp,"M")){
+	while((tmp = strstr(tmp,"M"))){
 		M_count++;
 		tmp++;	
 	}
 	
-	for(t = 0; t < M_count;t++){	//Makes a new String of the counted I X C and M
+	strcpy(OutputStr,"");
+	for(t = 0; t < M_count;t++){
 		strcat(OutputStr,"M");
 	}
 	for(t = 0; t < C_count;t++){
@@ -79,6 +80,24 @@ char* SearchAndSwap(const char* str, const char* old, const char* new1){
     	return ret;
 }
 
+char* Compress(const char* package){
+	char* CompressStr = NULL;	
+	CompressStr = SearchAndSwap(package,"IIIII","V");
+	CompressStr = SearchAndSwap(CompressStr,"VV","X");
+	CompressStr = SearchAndSwap(CompressStr,"XXXXX","L");
+	CompressStr = SearchAndSwap(CompressStr,"LL","C");
+	CompressStr = SearchAndSwap(CompressStr,"CCCCC","D");
+	CompressStr = SearchAndSwap(CompressStr,"DD","M");
+	CompressStr = SearchAndSwap(CompressStr,"VIIII","IX");
+	CompressStr = SearchAndSwap(CompressStr,"LXXXX","XC");
+	CompressStr = SearchAndSwap(CompressStr,"DCCCC","CM");
+	CompressStr = SearchAndSwap(CompressStr,"IIII","IV");
+	CompressStr = SearchAndSwap(CompressStr,"XXXX","XL");
+	CompressStr = SearchAndSwap(CompressStr,"CCCC","CD");
+	return CompressStr;
+		
+}
+
 char* Unpack(const char* package){
 	char* UnpackedStr = NULL;	
 	UnpackedStr = SearchAndSwap(package,"IV","IIII");	//Use the SearchAndSwap function to make the "package" in terms of I X C and M
@@ -110,13 +129,19 @@ const char* RomanNum(const char* var1, const char* var2){
 		printf("The Roman Numeral did not follow the correct input method, plz use all uppercase and follow the described rules in the README file\n");		
 		exit(EXIT_FAILURE);
 	}
-
+	puts(var1);
+	puts(var2);
 	strcpy (Answ,var1);
 	strcat (Answ,var2);				//Concatenate the two variables into one
+	puts(Answ);	
+
+	Answ = Unpack(Answ);		//Unpack the variables to make it simple to sort
+	puts(Answ);	
+	Answ = NewStr(Answ);		//Sort the variables to the correct format
+	puts(Answ);	
+	Answ = Compress(Answ);		//Compress the sorted string, var1 and var2 are now added
 	
-	Answ = Unpack(Answ);				//Unpack the variables to make it simple to sort
-	Answ = SortStr(Answ);				//Sort the variables to the correct format
-	
+	puts(Answ);	
 	return Answ;
 	
 
