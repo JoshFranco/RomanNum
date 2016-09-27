@@ -4,9 +4,8 @@
 #include<stdlib.h>
 #include<string.h>
 
-
 char* Subtract(const char* var1, const char* var2){
-	int I_count1 = 0;
+	int I_count1 = 0;	
 	int X_count1 = 0;
 	int C_count1 = 0;
 	int M_count1 = 0; 
@@ -18,7 +17,7 @@ char* Subtract(const char* var1, const char* var2){
 	char* OutputStr = malloc(100 * sizeof(char));
 	
 	const char* tmp = var1;	
-	while((tmp = strstr(tmp,"I"))){
+	while((tmp = strstr(tmp,"I"))){		//Counts the I X C and Ms of var1
 		I_count1++;
 		tmp++;	
 	}
@@ -39,7 +38,7 @@ char* Subtract(const char* var1, const char* var2){
 	}
 
 	tmp = var2;	
-	while((tmp = strstr(tmp,"I"))){
+	while((tmp = strstr(tmp,"I"))){		//Counts the I X C and Ms of var2
 		I_count2++;
 		tmp++;	
 	}
@@ -59,7 +58,7 @@ char* Subtract(const char* var1, const char* var2){
 		tmp++;	
 	}
 
-	if(I_count1 > I_count2){
+	if(I_count1 > I_count2){		//Adds I X C and Ms where needed to var 2
 		X_count2 = X_count2 - 1;
 		I_count2 = I_count2 + 10;	
 	}
@@ -74,7 +73,7 @@ char* Subtract(const char* var1, const char* var2){
 
 
 	
-	strcpy(OutputStr,"");
+	strcpy(OutputStr,"");			//Cancles out all similar I X C and Ms
 	for(t = 0; t < M_count2 - M_count1;t++){
 		strcat(OutputStr,"M");
 	}
@@ -87,10 +86,8 @@ char* Subtract(const char* var1, const char* var2){
 	for(t = 0; t < I_count2 - I_count1;t++){
 		strcat(OutputStr,"I");
 	}	
-	return OutputStr;
-	
+	return OutputStr;	
 }
-
 
 int AddOrSub(const char* var1, const char* var2){
 	int I_count1 = 0;
@@ -102,7 +99,7 @@ int AddOrSub(const char* var1, const char* var2){
 	int C_count2 = 0;
 	int M_count2 = 0; 
 	
-	const char* tmp = var1;	
+	const char* tmp = var1;		//Counts I X C and Ms in var1
 	while((tmp = strstr(tmp,"I"))){
 		I_count1++;
 		tmp++;	
@@ -123,7 +120,7 @@ int AddOrSub(const char* var1, const char* var2){
 		tmp++;	
 	}
 
-	tmp = var2;	
+	tmp = var2;			//Counts I X C and Ms in var2
 	while((tmp = strstr(tmp,"I"))){
 		I_count2++;
 		tmp++;	
@@ -295,15 +292,8 @@ const char* RomanNum(const char* var1, const char* var2){
 		return Answ;
 	}
 	else{
-		Answ = Subtract(Temp1,Temp2);
-		Answ = Compress(Answ);
+		Answ = Subtract(Temp1,Temp2);	//Negates all similar I X C and Ms
+		Answ = Compress(Answ);		//Compress the string, var1 and var2 are now sub
 		return Answ;
-	}
-		
-
-
-	
-	
-
-	
+	}	
 } 
