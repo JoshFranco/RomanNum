@@ -1,6 +1,0 @@
-#ifndef ROMANNUM_H
-#define ROMANNUM_H
-
-const char* RomanNum(const char* x, const char* y);
-
-#endif
