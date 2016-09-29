@@ -13,6 +13,11 @@ int match;
 	//fail_unless(match == 0, "When RomanNum is passed a char it does not returns a char");
 	fail_unless(1,"Phase one complete");
 
+#test TestForCorrectInputFormat
+	//match = strcmp(RomanNum("MMMCMXCIXII"),"MMMCMXCIXII");
+	//fail_unless(match != 0, "Testing for correct formatting, MMMCMXCIXII is not a valid input due to the two 'I's after the X");
+	fail_unless(1,"Phase one complete");
+
 #test FirstAddOfOnePlusOne
 	match = strcmp(RomanNum("I","I"), "II");
 	fail_unless(match == 0, "Simple add of one plus one");	
@@ -35,3 +40,6 @@ int match;
 	match = strcmp(RomanNum("XLIII","CXXIX"), "LXXXVI");
 	fail_unless(match == 0,"Subtraction, to Subtraction smaller numeral must be in front of a larger one.");
 
+#test TestingIfProgWillExitIfOver3999
+	match = strcmp(RomanNum("MM","MM"), "MMMM");
+	fail_unless(match != 0,"Testing if program will give an error if given a number over 3999");
